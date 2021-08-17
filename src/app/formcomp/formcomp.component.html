@@ -1,0 +1,123 @@
+<div class="row">
+  <!--Form-->
+  <div class="col">
+      <div class="container-sm containerclass" >
+        <div class="card cardclass">
+          <div class="card-header cardheaderclass">
+            Form Details
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">User Details</h5>
+            <p class="card-text">Fill the form details</p>
+            <form [formGroup]="formData" (ngSubmit)="Onsubmit()">
+              <div class="row">
+                <div class="col">
+                  <label class="labelclass">First Name</label>
+                  <input type="text" formControlName="firstname" class="form-control" placeholder="First name" aria-label="First Name">
+
+                </div>
+
+                <div class="col">
+                  <label class="labelclass">Last Name</label>
+                  <input type="text" formControlName="lastname" class="form-control" placeholder="Last name" aria-label="Last Name">
+                </div>
+
+
+                <div class="col">
+                  <label class="labelclass">Email</label>
+                  <input type="text" formControlName="email" class="form-control" placeholder="Email" aria-label="Email">
+                </div>
+              </div>
+            <div style="padding-top:5px ;">
+              <div class="row">
+                <div class="col">
+                  <label class="labelclass">Age</label>
+                  <input type="number" formControlName="age" class="form-control" placeholder="Age" aria-label="Age">
+                </div>
+
+                <div class="col">
+                  <label class="labelclass">DOB</label>
+                  <input type="date" formControlName="dateofbirth" class="form-control" aria-label="Date">
+                </div>
+
+                <div class="col">
+                  <mat-form-field>
+                    <mat-select formControlName="gender" placeholder="Select Gender" style="padding-top: 13px;">
+                      <mat-option *ngFor="let gender of genders" [value]="gender">
+                        {{ gender }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col">
+                 <label class="labelclass">Mobile Number</label>
+                  <input formControlName="mobilenumber" placeholder="Mobile Number" aria-label="Mobile Number" class="form-control" type="text">
+               </div>
+               <div class="col">
+                 <label class="labelclass">Native Place</label>
+                  <input formControlName="place" placeholder="Native Place" class="form-control" aria-label="Native Place" type="text">
+               </div>
+            </div>
+            <div class="row actions" style="padding-top: 18px;padding-left: 5rem;">
+              <div class="col" *ngIf="!isEdit">
+              <button class="btn btn-primary" type="submit">Submit</button>
+            </div>
+
+            <div class="col" *ngIf="isEdit">
+              <button class="btn btn-primary" type="button" (click)="Onsave()">Save</button>
+            </div>
+              <div class="col" >
+              <button (click)="Oncancel()" class="btn btn-danger" type="button">Cancel</button>
+            </div>
+            </div>
+            </form>
+          </div>
+        </div>
+      </div>
+  </div>
+
+  <div class="col" style="padding-top: 10px;">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">First Name</th>
+          <th scope="col">Last Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Mobile Number</th>
+          <th scope="col">Age</th>
+          <th scope="col">Edit</th>
+          <th scope="col">Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let datas of listOfData;let i =index">
+          <th scope="row">{{i}}</th>
+          <td>{{datas?.firstname}}</td>
+          <td>{{datas?.lastname}}</td>
+          <td>{{datas?.email}}</td>
+          <td>{{datas?.mobilenumber}}</td>
+          <td>{{datas?.age}}</td>
+          <td (click)="Onedit(i)">
+          <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+          </svg>
+        </td>
+        <td (click)="Ondelete(datas,i)">
+          <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+          </svg>
+        </td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+  </div>

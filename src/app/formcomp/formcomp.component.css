@@ -1,0 +1,18 @@
+.containerclass{
+border-radius: 2px;
+padding-top: 5px;
+}
+.cardclass{
+  border-radius: 13px;
+
+}
+.cardheaderclass{
+  background-color:#410efc;
+  font-size: 1.5rem ;
+  font-family:'Book Antiqua', serif;
+  color:white;
+  border-radius: 5px;
+}
+.labelclass{
+  font-family: "Times New Roman",serif;
+}
